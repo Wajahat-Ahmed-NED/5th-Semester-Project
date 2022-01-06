@@ -55,9 +55,10 @@ export default function Dashboard() {
 
   };
   useEffect(() => {
-    setLoader(true)
+
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        setLoader(true)
         const uid = user.uid
         console.log(uid)
         // setuserLogin(true);
@@ -79,7 +80,7 @@ export default function Dashboard() {
         <h1>Loading...</h1>
       ) : (<>
         {/* <Navbar /> */}
-        <MenuAppBar name={userData.name} />
+        <MenuAppBar name={userData?.name} />
 
         <div>
           <h1>This is Dashboard</h1>
@@ -131,7 +132,7 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div> */}
-            <br/>
+      <br />
       <Button onClick={logout} value="SignOut" />
 
     </>

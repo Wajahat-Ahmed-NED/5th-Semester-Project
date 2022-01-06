@@ -21,18 +21,19 @@ const provider = new GoogleAuthProvider();
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCk9YThr_eYU4opwuwNq0dM81Yrk-SoprA",
-    authDomain: "fb-auth-d1867.firebaseapp.com",
-    projectId: "fb-auth-d1867",
-    storageBucket: "fb-auth-d1867.appspot.com",
-    messagingSenderId: "428939442556",
-    appId: "1:428939442556:web:068422e07fa0e188180cf9",
-    measurementId: "G-0294XZ0452"
-  };
+    apiKey: "AIzaSyBm7fSC-Ke9eLoMfZMNXXQqp2lSesCkHK0",
+    authDomain: "ned-semester-project.firebaseapp.com",
+    databaseURL: "https://ned-semester-project-default-rtdb.firebaseio.com",
+    projectId: "ned-semester-project",
+    storageBucket: "ned-semester-project.appspot.com",
+    messagingSenderId: "127553456101",
+    appId: "1:127553456101:web:1412e9fa4c40b6555a510c"
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
+// const firebase=firebase.auth()
+const auth = getAuth()
 const db = getDatabase(app)
 export {
     auth,

@@ -13,7 +13,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const Login = (e) => {
-      setLoader(true);
+    setLoader(true);
     e.preventDefault();
 
     let obj = {
@@ -35,8 +35,8 @@ export default function Login() {
 
           setEmail("");
           setPassword("");
-        //   alert("Log In Successful");
-        console.log('succesfull')
+          //   alert("Log In Successful");
+          console.log('succesfull')
         });
       })
       .catch((err) => {
