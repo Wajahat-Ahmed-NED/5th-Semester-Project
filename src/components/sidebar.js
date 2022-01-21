@@ -7,7 +7,7 @@ export default function Sidebar(){
         <>
         <div class="sidebar">
         
-        <h2 class="slider_title">Catageory</h2>
+        <h2 class="slider_title">CATAGORY</h2>
         <a href="#Admission Faculty">Admission Faculty</a>
         <a href="#Civil Department">Civil Department</a>
         <a href="#Mechanical Department">Mechanical Department</a>

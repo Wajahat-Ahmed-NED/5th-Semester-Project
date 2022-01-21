@@ -8,17 +8,26 @@
     overflow: auto;
     margin-left: 50px;
     margin-top: 50px;
+    font-family: 'Montserrat';
+    font-size: 15.5px;
+    /* color: ' #2A2A2A'; */
   }
 
   .sidebar a {
     display: block;
-    color: black;
+    color: white;
     /* background-color: rgb(4, 194, 178); */
+    
 
-    padding: 16px;
+    border-bottom: 1.5px solid black;
+    
+    margin: 20px;
+    /* padding: 16px; */
     text-decoration: none;
     /* text-align: center; */
-    padding-left: 10%;
+    padding-top: 5%;
+    padding-bottom: 1.5%;
+
   }
   
  .slider_title{
@@ -26,6 +35,8 @@
      text-align: center;
      padding: 10px 0px;
      margin: 10px 0px;
+     font-weight:bold;
+
  }
   
   /* Links on mouse-over */
