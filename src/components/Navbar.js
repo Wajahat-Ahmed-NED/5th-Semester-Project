@@ -30,10 +30,18 @@ export default function Navbar() {
                             </li>
 
                         </ul>
+                            <form class="d-flex">
+        <input class="form-control  shadow-none me-auto" type="search" placeholder="Search" aria-label="Search" style={{width:"auto",outline:"none"}}/>
+        <button class="btn btn-outline-success shadow-none me-auto" type="submit">Search</button>
+      </form>
 
                     </div>
                 </div>
             </nav>
+
+
+
+
         </>
     )
 }

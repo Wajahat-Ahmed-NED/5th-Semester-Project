@@ -1,96 +1,76 @@
-import { signInWithEmailAndPassword } from "@firebase/auth";
-import React from "react";
-import { Link } from "react-router-dom";
-import Button from "../components/Button";
-import { auth } from "../config/firebase";
-import { useNavigate } from "react-router";
-import { useState } from "react";
-import { db, ref, onValue } from "../config/firebase";
+import { useNavigate } from 'react-router-dom';
+import './login.css';
+function Login() {
+    const navigate = useNavigate()
 
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const [loader, setLoader] = useState(false);
-  const Login = (e) => {
-    setLoader(true);
-    e.preventDefault();
+    const handleSignUp = () => {
+        console.log("Create Account")
+        navigate("/signup")
+    }
 
-    let obj = {
-      email,
-      password,
-    };
+    return (
+        <>
+            <div className="d-flex align-items-center">
 
-    signInWithEmailAndPassword(auth, obj.email, obj.password)
-      .then((response) => {
-        console.log(response);
-        const refrence = ref(db, `/users/${response.user.uid}`);
+                <div className="container px-4 center mb-5" style={{ marginTop: '118px' }}>
+                    <h2 className="p-5 pb-2 my-3"
+                        style={{ fontWeight: 'bold', color: 'black', fontSize: '24px' }}>
+                        SIGN
+                        IN
+                    </h2>
+                    <form className="px-5 pt-2" >
+                        <div className=" mb-3">
+                            <label  htmlFor="inputEmail3" className="col-form-label">Email</label>
+                            <div>
+                                <input required style={{ width: '333px', height: '45px' }} type="email" placeholder="example@gmail.com"
+                                    className="form-control" id="inputEmail3" />
+                            </div>
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="inputPassword3" className=" col-form-label">Password</label>
+                            <div>
+                                <input required style={{ width: '333px', height: '45px' }} type="password" placeholder="******"
+                                    className="form-control" id="inputPassword3" />
+                            </div>
+                        </div>
+                        <div className=" mb-3 ">
 
-        onValue(refrence, (snapshot) => {
-          if (snapshot.exists()) {
-            console.log(snapshot.val());
-            let userObj = snapshot.val();
-            navigate("/", { state: userObj });
-          }
+                            <div className="form-check  d-flex justify-content-between my-4">
+                                <div>
+                                    <input className="form-check-input" type="checkbox" id="gridCheck1" />
+                                    <label className="form-check-label" htmlFor="gridCheck1">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a href="#" style={{ color: 'black',  paddingRight: '25px' }}>Forget Password</a>
+                            </div>
+                            {/* textDecorationStyle: 'dashed', */}
 
-          setEmail("");
-          setPassword("");
-          //   alert("Log In Successful");
-          console.log('succesfull')
-        });
-      })
-      .catch((err) => {
-        console.log(err.message);
-        alert("Wrong Email or Password");
-      });
-    setLoader(false);
-  };
-  // d-flex justify-content-center align-items-center
-  return (
-    <div
-      className="d-flex justify-content-center align-items-center"
-      style={{
-        backgroundColor: "black",
-        marginTop: "auto",
-        marginLeft: "auto",
-        marginRight: "auto",
-        height: "100vh",
-      }}
-    >
-      {loader ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div
-          className=" p-4 "
-          style={{ backgroundColor: "white", borderRadius: "20px" }}
-        >
-          <h1>Login</h1>
-          <br />
-          <form onSubmit={(e) => Login(e)}>
-            <input
-              className="p-1 m-1"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Enter Email Address"
-            />
-            <br />
-            <input
-              className="p-1 m-1"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              placeholder="Enter Password"
-            />
-            <br />
-            <br />
-            <Button value="Login" />
-          </form>
-          <hr />
-          <h4>Don't Register?</h4>
-          <Link to="/signup">Sign Up</Link> Here
-        </div>
-      )}
-    </div>
-  );
+                        </div>
+                        <div className="d-grid gap-2 col-12 mx-auto">
+                            <button className="btn  my-2 btnCol " style={{ width: '333px', height: '45px', color: 'white' }}>Sign
+                                in</button><br />
+                            <p className="text-center my-2">Don't have an account ?</p>
+                        </div>
+                    </form>
+                    <div className="d-grid gap-2 col-12  px-5 ">
+
+
+                        <button onClick={handleSignUp}
+                            style={{ fontWeight: 'bold', boxShadow: 'none', width: '333px', height: '45px' }} className="btn  border">Create an
+                            account</button>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </>
+    )
 }
+
+export default Login

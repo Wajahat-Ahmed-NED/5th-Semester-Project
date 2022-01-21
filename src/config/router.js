@@ -8,6 +8,7 @@ import Login from "../screen/Login";
 import Home from "../screen/Home";
 import Signup from "../screen/Signup";
 import Navbar2 from "../components/Navbar2";
+import Sidebar from "../components/sidebar";
 
 export default function AppRouter() {
   return (
@@ -15,6 +16,7 @@ export default function AppRouter() {
       <div>
         <Routes>
           <Route path='/' element={<Dashboard />} />
+          <Route path='/Sidebar' element={<Sidebar />} />
           <Route path='/Signup' element={<Signup />} />
           <Route path='/Login' element={<Login />} />
           <Route path='/Navbar2' element={<Navbar2 />} />

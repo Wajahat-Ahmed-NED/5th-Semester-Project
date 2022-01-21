@@ -1,147 +1,212 @@
-import React from "react";
-import Button from "../components/Button";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { createUserWithEmailAndPassword } from "@firebase/auth";
-import { auth, db, ref, set } from "../config/firebase";
-import { useNavigate } from "react-router";
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [age, setAge] = useState(18);
-  const [cnic, setCnic] = useState(0);
-  const [loader, setLoader] = useState(false)
-  const navigate = useNavigate()
+    const [val, setVal] = useState(0)
 
-  //   const handleBtn=()=>{
+    const member = () => {
+        setVal(0)
+    }
+    const agency = () => {
+        setVal(1)
+    }
 
-  //   }
-  const Signup = (e) => {
-    e.preventDefault();
-    // setLoader(true)
-    let obj = {
-      name,
-      email,
-      password,
-      age,
-      cnic
-    };
-    createUserWithEmailAndPassword(auth, obj.email, obj.password)
-      .then((res) => {
-        setLoader(true)
-        let uid = res.user.uid;
-        console.log(uid);
-        obj.uid = uid;
-        const refrence = ref(db, `/users/${obj.uid}`);
-        console.log(obj.uid);
-        set(refrence, obj)
-          .then(() => {
-            setEmail("");
-            setPassword("");
-            setName("");
-            setAge(0);
-            setCnic("");
-            alert("user created Successfully");
 
-            navigate("/")
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-    setLoader(false)
-    console.log(obj);
-  };
-  // provider((e)=>{
-  //     console.log(e)
-  // })
-  return (
-    <div
-      div
-      className="d-flex justify-content-center align-items-center"
-      style={{
-        backgroundColor: "black",
-        marginTop: "auto",
-        marginLeft: "auto",
-        marginRight: "auto",
-        height: "100vh",
-      }}
-    >
-      {
-        loader ? <h1>Loading...</h1> :
+    return (
+        <>
 
-          <div
-            className=" p-4 "
-            style={{ backgroundColor: "white", borderRadius: "20px" }}
-          >
-            <h1>Sign up</h1>
-            <br />
-            <form
-              onSubmit={(e) => {
-                Signup(e);
-              }}
-            >
-              <input
-                className="p-1 m-1"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                placeholder="Enter your Name"
-              />
-              <br />
-              <input
-                className="p-1 m-1"
-                onChange={(e) => setAge(e.target.value)}
-                type="number"
-                placeholder="Enter your Age"
-              />
-              <br />
-              <input
-                className="p-1 m-1"
-                onChange={(e) => setCnic(e.target.value)}
-                type="text"
-                placeholder="Enter your CNIC"
-                maxLength="13"
-              />
-              <br />
-              {/* <select className="p-1 m-1 " style={{width:'195px'}}>
-            <option selected>Select Country</option>
-            <option value="1">Pakistan</option>
-            <option value="2">India</option>
-            <option value="3">USA</option>
-          </select><br/> */}
+            <div className="container px-4 center1 my-5  ">
+                <h2 className="p-5 pb-2 my-3"
+                    style={{ fontFamily: 'Montserrat', fontSize: '24px', color: ' #2A2A2A', fontWeight: 'bold' }}>CREATE AN
+                    ACCOUNT</h2>
+                <label className="px-5 pb-2 " style={{ fontSize: '13px' }}>Type</label>
+                <div className="px-5 pb-2 ">
+                    <button onClick={member} id="member" className={
+                        val === 0 ? "btn my-2 btnCol" : "btn my-2 selbtnCol border"
+                    }
+                        style={{ width: '100px', height: '35px' }}>Student</button>
+                    <button onClick={agency} id="agency" className={
+                        val === 1 ? "btn my-2 btnCol " : "btn my-2 selbtnCol border"
+                    }
+                        style={{ width: '100px', height: '35px' }}>Administrator</button>
+                </div>
 
-              <input
-                className="p-1 m-1"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                placeholder="Enter Email Address"
-              />
-              <br />
+                <form id="myForm" className={val !== 0 ? "dnone px-5 pt-2 " : "px-5 pt-2 "}>
 
-              {/* <input type="text" id="username" name="username" maxlength="10"><br><br></br> */}
-              <input
-                className="p-1 m-1"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                placeholder="Enter Password"
-              />
-              <br />
-              <br />
-              <Button value="Sign up" />
-            </form>
-            <hr />
-            <h4>Already have an account?</h4>
-            <Link to="/login">Login</Link> Here
-          </div>
-      }
-    </div>
-  );
+
+                    <div className=" mb-3">
+                        <label htmlFor="inputEmail3" className="col-form-label">Email</label>
+                        <div>
+                            <input required type="email" style={{ height: '35px' }} placeholder="Your Email" className="form-control"
+                                id="inputEmail3" />
+                        </div>
+                    </div>
+
+
+                    <div className="d-flex justify-content-between">
+                        <div className="mb-3 ">
+                            <label htmlFor="inputPassword3" className=" col-form-label">Phone (Optional)</label>
+                            <div>
+                                <input style={{ width: '280px', height: '35px' }} required type="tel" pattern="[0-9]{12}"
+                                    placeholder="Your Phone No:" className="form-control" id="inputPassword3" />
+                            </div>
+                        </div>
+                        <div className="mb-3 ">
+                            <label htmlFor="inputPassword1" className=" col-form-label">Name</label>
+                            <div>
+                                <input style={{ width: '280px', height: '35px' }} required type="text" placeholder="Your Name"
+                                    className="form-control" id="inputPassword1" />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div className="d-flex justify-content-between">
+                        <div className="mb-3 ">
+                            <label htmlFor="inputPassword2" className=" col-form-label">Password</label>
+                            <div>
+                                <input style={{ width: '280px', height: '35px' }} required type="password" placeholder="Your Password"
+                                    className="form-control" id="inputPassword2" />
+                            </div>
+                        </div>
+                        <div className="mb-3 ">
+                            <label htmlFor="inputPassword4" className=" col-form-label">Confirm Password</label>
+                            <div>
+                                <input style={{ width: '280px', height: '35px' }} required type="password"
+                                    placeholder="Confirmed Password" className="form-control" id="inputPassword4" />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div className=" mb-3 ">
+                        <div className="form-check  d-flex justify-content-between">
+                            <div>
+                                <input className="form-check-input" type="checkbox" id="gridCheck1" />
+                                <label className="form-check-label" htmlFor="gridCheck1" >
+                                    I agree to Student <span><a href="#" style={{ textDecorationLine: 'none' }}> privacy
+                                        policy</a></span> and <span> <a href="#" style={{ textDecorationLine: 'none' }}> terms
+                                            of
+                                            use</a> </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div className="">
+                        <button className="  btn my-2 btnCol " style={{ width: '200px', height: '45px', color: 'white' }}>Sign Up</button>
+                        <p className=" my-2">Already have an account? <span><Link to="/" style={{ color: 'black' }}>Sign
+                            In</Link></span> &nbsp;</p>
+                    </div>
+                </form>
+
+                <form className={val !== 1 ? "dnone px-5 pt-2 " : "px-5 pt-2 "} id="myForm1" >
+
+
+                    <div className=" mb-3">
+                        <label htmlFor="inputEmail3" className="col-form-label">Email</label>
+                        <div>
+                            <input required style={{ height: '35px' }} type="email" placeholder="Content" className="form-control"
+                                id="inputEmail3" />
+                        </div>
+                    </div>
+
+
+                    <div className="d-flex justify-content-between">
+                        <div className="mb-3 ">
+                            <label htmlFor="inputPassword3" className=" col-form-label">Phone (Optional)</label>
+                            <div>
+                                <input style={{ width: '280px', height: '35px' }} required type="tel" pattern="[0-9]{12}"
+                                    placeholder="Content" className="form-control" id="inputPassword3" />
+                            </div>
+                        </div>
+
+
+                        <div className="mb-3 ">
+                            <label htmlFor="inputPassword1" className=" col-form-label">Name</label>
+                            <div>
+                                <input style={{ width: '280px', height: '35px' }} required type="text" placeholder="Content"
+                                    className="form-control" id="inputPassword1" />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div className="d-flex justify-content-between">
+                        <div className="mb-3 ">
+                            <label htmlFor="inputPassword2" className=" col-form-label">Password</label>
+                            <div>
+                                <input style={{ width: '280px', height: '35px' }} required type="password" placeholder="Content"
+                                    className="form-control" id="inputPassword2" style={{ width: '280px' }} />
+                            </div>
+                        </div>
+                        <div className="mb-3 ">
+                            <label htmlFor="inputPassword4" className=" col-form-label">Confirm Password</label>
+                            <div>
+                                <input style={{ width: '280px', height: '35px' }} required type="password" placeholder="Content"
+                                    className="form-control" id="inputPassword4" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div className="d-flex justify-content-between">
+
+                        <div className="mb-3 ">
+                            <label htmlFor="file[]" className=" col-form-label">Upload Proof-of-organization Documents</label>
+
+                            <input type="file" placeholder="Content" name="file[]" className="form-control" id="file[]" multiple />
+
+
+
+                        </div>
+                    </div>
+
+                    <div className=" mb-3 ">
+                        <div className="form-check  ">
+                            <div>
+                                <input className="form-check-input" type="checkbox" id="gridCheck11" />
+                                <label className="form-check-label" htmlFor="gridCheck11">
+                                    I am real estate agent
+                                </label>
+                            </div>
+                            <br />
+                            <div>
+                                <input className="form-check-input" type="checkbox" id="gridCheck12" />
+                                <label className="form-check-label" htmlFor="gridCheck12">
+                                    I agree to Makanumber <span><a href="#" style={{ textDecorationLine: 'none' }}> privacy
+                                        policy</a></span> and <span> <a href="#" style={{ textDecorationLine: 'none' }}> terms
+                                            of
+                                            use</a> </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div className="">
+                        <button className="  btn my-2 btnCol " style={{ width: '200px', height: '45px', color: 'white' }}>Sign Up</button>
+                        <p className=" my-2" >Already have an account? <span><Link to="/" style={{ color: 'black' }}>Sign
+                            In</Link></span> &nbsp;</p>
+                    </div>
+                </form>
+
+
+
+
+            </div>
+
+
+        </>
+    )
 }
