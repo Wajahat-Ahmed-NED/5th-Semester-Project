@@ -3,13 +3,17 @@ import './App.css';
 import AppRouter from './config/router';
 // import Firebase from "./config/firebase";
 import * as React from 'react';
+import NavBar from './components/Navbar2';
 // import Stack from '@mui/material/Stack';
 // import Button from '@mui/material/Button';
+import NavBar3 from './components/Navbar3'
+import AppBar from '@mui/material/AppBar';
 
     
 function App() {
   return (
     <div className="App">
+     <NavBar3/>
       
       <AppRouter />
 
